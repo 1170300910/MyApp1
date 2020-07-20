@@ -1,0 +1,50 @@
+第一课
+安卓手机调成开发者模式（快速点击版本号）
+包名至少要4位
+若Gradle sync失败，点击右上角的Sync Project with Gradle Files（若经常下载失败，更改host文件（不止一个host文件））
+Android Virtual Device Manager
+android:id可以随便更改为"@+id/"+……
+android:layout_width="wrap_content"表示根据内容缩放
+dp: dot per inch不是像素
+hdpi：high dot per inch高分辨率
+mdpi
+xhdpi
+xxhdpi
+xxxhdpi
+android:hint="请输入用户名" 该输入框开始输入内容后，提示会消失
+.kt表示是kotlin文件
+.xml是布局文件 新建Layout Resource File
+app文件夹上右下角绿色的点表示这个文件是可执行的
+res文件夹上右下角的4条黄线表示这个文件是资源库
+Project与模块（app）中有对应的配置文件（build.gradle）
+apply plugin: 'com.android.application'：表示该模块是一个应用
+versionCode：表示该应用的版本
+右键项目文件中的Open Module Settings中可以改变gradle文件
+安卓主线程是UI线程，若需要访问网络，需要单独启用线程
+面向对象数据库
+
+第二课 数据持久化
+数据（行）、列（字段）
+Android主要使用的数据库是SQLite，本课使用RealM数据库（面向对象数据库，存储与读取速度比SQLite快）
+Java中保存数据的方式：ArrayList
+NFC：Near Field Communication
+保存数据的方式：
+1. Preference保存数据：属性名称=属性值
+
+Kotlin：
+可以和Java混合编程，互相调用
+同Java一样要求类名与文件名相同
+用:代替extends和implement
+fun表示function
+一个activity只能对应一个布局文件
+onCreate方法用于加载布局文件
+
+强类型语言：
+定义常量用val
+若定义变量时后面有等号，则可以不需要定义为特定的变量类型（只要声明为var就可以），编译器会自动匹配；若要声明具体类型，则采用：var mSharedPreference:SharedPreferences
+若在函数定义后面加:，表示该函数返回值类型
+
+Java中每次使用变量之前都要判断其是否为空；Kotlin变量定义后加？表示该变量可以为null，使用对象的时候加？表示如果变量为null则不执行该语句，使用对象时加!!表示告诉编译器该变量不可能为null（尽量不要使用）
+变量命名习惯：若是自定义的则以m开头；
+
+
