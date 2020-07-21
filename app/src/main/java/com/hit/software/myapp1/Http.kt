@@ -33,7 +33,7 @@ object Http { //object表示静态类
             //回调方法
             val cb:Callback=object :Callback{
                 override fun onFailure(call: Call, e: IOException) {
-                    Log.d("hello","网络请求失败")
+                    Log.d("hello","This is onFailure! 网络请求失败！")
                     res?.errorMsg()
                 }
 

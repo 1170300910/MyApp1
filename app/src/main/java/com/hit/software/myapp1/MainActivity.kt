@@ -15,7 +15,9 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import io.realm.Realm
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 
@@ -24,7 +26,10 @@ class MainActivity : AppCompatActivity(),HttpResponse,AMapLocationListener {
     var mRealm:Realm?=null
     var mHandler=object: Handler() {
         override fun handleMessage(msg: Message) {
-            tips.setText(msg.obj.toString())
+            when(msg.what){
+                1->tips.setText(msg.obj.toString())
+                2->tips.setText(msg.obj.toString())
+            }
         }
     }
 
@@ -60,7 +65,9 @@ class MainActivity : AppCompatActivity(),HttpResponse,AMapLocationListener {
             Log.d("hello","发送的网络请求是"+mLoginRequest)
             //发送用户登录请求
 //            Http.post_send(this,"http://localhost:8080/mlogin",mLoginRequest)
-            Http.post_send(this,"http://add52e5.cpolar.io/mlogin",mLoginRequest)
+            //以上这么写会网络失败是因为对于AVD来说localhost是模拟器本事，也就是说请求并没有发送到web端
+            Http.post_send(this,"http://192.168.162.1:8080/mlogin",mLoginRequest)
+//            Http.post_send(this,"http://add52e5.cpolar.io/mlogin",mLoginRequest)
         }
 
 //        setContentView(R.layout.layout2)

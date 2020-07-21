@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@null"
     tools:context=".HomeActivity">
 
     <EditText
@@ -27,24 +28,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/que_A"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:singleLine="false"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_subject" />
-
-    <EditText
         android:id="@+id/que_B"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:background="@null"
+        android:inputType="textMultiLine"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/que_A"
-        app:layout_constraintStart_toStartOf="@+id/que_A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/que_A" />
 
     <EditText
@@ -52,6 +44,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:background="@null"
+        android:inputType="textMultiLine"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/que_B"
         app:layout_constraintStart_toStartOf="@+id/que_B"
@@ -62,6 +56,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:background="@null"
+        android:inputType="textMultiLine"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/que_C"
         app:layout_constraintStart_toStartOf="@+id/que_C"
@@ -87,5 +83,19 @@
         android:text="保存"
         app:layout_constraintEnd_toEndOf="@+id/input_answer"
         app:layout_constraintTop_toBottomOf="@+id/input_answer" />
+
+    <EditText
+        android:id="@+id/que_A"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_subject" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

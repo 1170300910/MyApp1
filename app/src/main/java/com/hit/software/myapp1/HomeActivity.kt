@@ -12,7 +12,16 @@ class HomeActivity : AppCompatActivity(),HttpResponse {
 
     var mHandler=object: Handler() {
         override fun handleMessage(msg: Message) {
-            input_subject.setText(msg.obj?.toString())
+            when(msg.what){
+                0->{
+                    val data=JSONObject(msg.obj.toString())
+                    que_A.setText("A. "+data.optString("queA"))
+                    que_B.setText("B. "+data.optString("queB"))
+                    que_C.setText("C. "+data.optString("queC"))
+                    que_D.setText("D. "+data.optString("queD"))
+                }
+                else->input_subject.setText(msg.obj?.toString())
+            }
         }
     }
 
@@ -29,7 +38,18 @@ class HomeActivity : AppCompatActivity(),HttpResponse {
             Log.d("hello","发送的题目请求是："+mExamRequest)
             //发送答题请求
 //            Http.post_send(this,"http://add52e5.cpolar.io/mlogin",mExamRequest)
-            Http.post_send(this,"http://add52e5.cpolar.io/que/request",mExamRequest)
+            Http.post_send(this,"http://192.168.162.1:8080/que/request",mExamRequest)
+        }
+
+        /**
+         * 给保存按钮设置监听，将信息发送给后台
+         * 请求数据格式：{"queTitle":"","answer":"A/B/C/D"}
+         */
+        button_save.setOnClickListener{
+            val mAnswer="{\"queTitle\":\""+input_subject.text.toString()+"\",\"answer\":\""+input_answer.text.toString()+"\"}"
+            Log.d("hello","保存答案请求是："+mAnswer)
+            //发送保存请求
+            Http.post_send(this,"http://192.168.162.1:8080/que/save",mAnswer)
         }
     }
 
@@ -40,36 +60,21 @@ class HomeActivity : AppCompatActivity(),HttpResponse {
         if(requestResult==null){
             mMessage.what=2
             mMessage.obj="返回消息不是exam类型"
-            mHandler.sendMessage(mMessage)
         }
         else{
             if(requestResult!=""){ //存在该科目试题
 //            startActivity(Intent(this,HomeActivity::class.java))
                 Log.d("hello","试题为："+requestResult)
-                //展示选项
-                val data= JSONObject(requestResult)
-                Log.d("hello",data.optString("queA"))
-                Log.d("hello",data.optString("queB"))
-                Log.d("hello",data.optString("queC"))
-                Log.d("hello",data.optString("queD"))
-//                que_A.setText("A. "+data.optString("queA")+" B. "+data.optString("queB")+" C. ${data.optString("queC")}"+" D. ${data.optString("queD")}")
-                /**
-                 * 给保存按钮设置监听，将信息发送给后台
-                 * 请求数据格式：{"queTitle":"","answer":"A/B/C/D"}
-                 */
-                button_save.setOnClickListener{
-                    val mAnswer="{\"queTitle\":\""+data.optString("queTitle")+"\",\"answer\":\""+input_subject.text.toString()+"\"}"
-                    Log.d("hello","保存答案请求是："+mAnswer)
-                    //发送保存请求
-                    Http.post_send(this,"http://add52e5.cpolar.io/que/save",mAnswer)
-                }
+                //不可以直接在协程的回调方法中setText，原因是什么我也不知道
+                mMessage.what=0
+                mMessage.obj=requestResult //肯定不是空字符串
             }
             else{ //不存在该科目试题
                 mMessage.what=1
                 mMessage.obj="输入科目不存在！"
             }
-            mHandler.sendMessage(mMessage)
         }
+        mHandler.sendMessage(mMessage)
     }
 
     override fun errorMsg() {
