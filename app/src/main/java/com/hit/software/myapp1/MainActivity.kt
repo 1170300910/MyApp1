@@ -15,11 +15,7 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import io.realm.Realm
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONObject
-import java.io.File
-import java.io.FileOutputStream
 
 
 class MainActivity : AppCompatActivity(),HttpResponse,AMapLocationListener {
@@ -47,6 +43,15 @@ class MainActivity : AppCompatActivity(),HttpResponse,AMapLocationListener {
          * 请求数据格式：{"username":"", "userpassword":""}
          */
         button_login.setOnClickListener{
+            val mLoginRequest="{\"user_name\":\""+input_name.text.toString()+"\",\"user_password\":\""+input_password.text.toString()+"\"}"
+            Log.d("hello","发送的网络请求是"+mLoginRequest)
+            //发送用户登录请求
+            Log.d("hello","url: "+ this.getString(R.string.server_url)+"/mlogin")
+            Http.post_send(this,this.getString(R.string.server_url)+"/mlogin",mLoginRequest)
+//            Http.post_send(this,"http://localhost:8080/mlogin",mLoginRequest)
+            //以上这么写会网络失败是因为对于AVD来说localhost是模拟器本事，也就是说请求并没有发送到web端
+//            Http.post_send(this,"http://add52e5.cpolar.io/mlogin",mLoginRequest)
+
 //            savePreferences("username",)
 //            savePreferences("userpassword",input_password.text.toString())
 
@@ -60,18 +65,9 @@ class MainActivity : AppCompatActivity(),HttpResponse,AMapLocationListener {
 //            mIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 //            mIntent.action = "com.tencent.mm"
 //            this.sendBroadcast(mIntent)
-
-            val mLoginRequest="{\"user_name\":\""+input_name.text.toString()+"\",\"user_password\":\""+input_password.text.toString()+"\"}"
-            Log.d("hello","发送的网络请求是"+mLoginRequest)
-            //发送用户登录请求
-//            Http.post_send(this,"http://localhost:8080/mlogin",mLoginRequest)
-            //以上这么写会网络失败是因为对于AVD来说localhost是模拟器本事，也就是说请求并没有发送到web端
-            Http.post_send(this,"http://192.168.162.1:8080/mlogin",mLoginRequest)
-//            Http.post_send(this,"http://add52e5.cpolar.io/mlogin",mLoginRequest)
         }
 
 //        setContentView(R.layout.layout2)
-//        R.string.app_name
 //        Log.d("hello","This is activity.")
 
 //        val mConfig= RealmConfiguration.Builder()

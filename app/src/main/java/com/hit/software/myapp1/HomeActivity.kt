@@ -37,8 +37,7 @@ class HomeActivity : AppCompatActivity(),HttpResponse {
             val mExamRequest="{\"subject\":\""+input_subject.text.toString()+"\"}"
             Log.d("hello","发送的题目请求是："+mExamRequest)
             //发送答题请求
-//            Http.post_send(this,"http://add52e5.cpolar.io/mlogin",mExamRequest)
-            Http.post_send(this,"http://192.168.162.1:8080/que/request",mExamRequest)
+            Http.post_send(this,this.getString(R.string.server_url)+"/que/request",mExamRequest)
         }
 
         /**
@@ -49,7 +48,7 @@ class HomeActivity : AppCompatActivity(),HttpResponse {
             val mAnswer="{\"queTitle\":\""+input_subject.text.toString()+"\",\"answer\":\""+input_answer.text.toString()+"\"}"
             Log.d("hello","保存答案请求是："+mAnswer)
             //发送保存请求
-            Http.post_send(this,"http://192.168.162.1:8080/que/save",mAnswer)
+            Http.post_send(this,this.getString(R.string.server_url)+"/que/save",mAnswer)
         }
     }
 
