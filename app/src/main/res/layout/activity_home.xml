@@ -1,33 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/input_subject"
+        android:layout_width="275dp"
+        android:layout_height="65dp"
+        android:ems="10"
+        android:hint="请输入要答的题目"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_request"
+        android:layout_width="104dp"
+        android:layout_height="60dp"
+        android:text="答题"
+        app:layout_constraintBottom_toBottomOf="@+id/input_subject"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/input_subject"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/que_A"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_marginTop="100dp"
+        android:singleLine="false"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_subject" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <EditText
+        android:id="@+id/que_B"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/que_A"
+        app:layout_constraintStart_toStartOf="@+id/que_A"
+        app:layout_constraintTop_toBottomOf="@+id/que_A" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    <EditText
+        android:id="@+id/que_C"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/que_B"
+        app:layout_constraintStart_toStartOf="@+id/que_B"
+        app:layout_constraintTop_toBottomOf="@+id/que_B" />
 
-    <include layout="@layout/content_home" />
+    <EditText
+        android:id="@+id/que_D"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/que_C"
+        app:layout_constraintStart_toStartOf="@+id/que_C"
+        app:layout_constraintTop_toBottomOf="@+id/que_C" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <EditText
+        android:id="@+id/input_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="请输入答案"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/que_D" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="保存"
+        app:layout_constraintEnd_toEndOf="@+id/input_answer"
+        app:layout_constraintTop_toBottomOf="@+id/input_answer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

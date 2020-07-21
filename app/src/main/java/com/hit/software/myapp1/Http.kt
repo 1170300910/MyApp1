@@ -42,17 +42,6 @@ object Http { //object表示静态类
                     //Log.d("hello",response.body?.string())
                     //Returns the response as a string.
                     val r=response.body?.string()
-
-//                    var mJSONObject=JSONObject(r!!)
-////                    mJSONObject=mJSONObject!!.optJSONObject("data")
-////                    val quality=mJSONObject.optString("quality","")
-////                    val wendu=mJSONObject.optString("wendu","")
-////                    val ganmao=mJSONObject.optString("ganmao","")
-////
-////                    Log.d("hello",quality)
-////                    Log.d("hello",wendu)
-////                    Log.d("hello",ganmao)
-
                     res?.getResponse(r)
                 }
             }

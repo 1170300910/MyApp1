@@ -18,8 +18,6 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.io.FileOutputStream
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class MainActivity : AppCompatActivity(),HttpResponse,AMapLocationListener {
@@ -38,6 +36,33 @@ class MainActivity : AppCompatActivity(),HttpResponse,AMapLocationListener {
     override fun onCreate(savedInstanceState: Bundle?) { //打开应用时执行
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        /**
+         * 给登录按钮设置监听，将信息发送给后台
+         * 请求数据格式：{"username":"", "userpassword":""}
+         */
+        button_login.setOnClickListener{
+//            savePreferences("username",)
+//            savePreferences("userpassword",input_password.text.toString())
+
+//            startActivity(Intent(this,WebActivity::class.java).putExtra("user_name","abc"))
+//            this.finish()
+//            // Call this when your activity is done and should be closed.
+//            //也就是如果退出上面start的activity，该activity也会退出
+//
+//            //给指定的app发送广播
+//            var mIntent=Intent()
+//            mIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//            mIntent.action = "com.tencent.mm"
+//            this.sendBroadcast(mIntent)
+
+            val mLoginRequest="{\"user_name\":\""+input_name.text.toString()+"\",\"user_password\":\""+input_password.text.toString()+"\"}"
+            Log.d("hello","发送的网络请求是"+mLoginRequest)
+            //发送用户登录请求
+//            Http.post_send(this,"http://localhost:8080/mlogin",mLoginRequest)
+            Http.post_send(this,"http://add52e5.cpolar.io/mlogin",mLoginRequest)
+        }
+
 //        setContentView(R.layout.layout2)
 //        R.string.app_name
 //        Log.d("hello","This is activity.")
@@ -65,31 +90,6 @@ class MainActivity : AppCompatActivity(),HttpResponse,AMapLocationListener {
 //        mRealm?.commitTransaction() //提交事务
 
         /**
-         * 给登录按钮设置监听，将信息发送给后台
-         * 请求数据格式：{"username":"", "userpassword":""}
-         */
-        button_login.setOnClickListener{
-//            savePreferences("username",)
-//            savePreferences("userpassword",input_password.text.toString())
-
-//            startActivity(Intent(this,WebActivity::class.java).putExtra("user_name","abc"))
-//            this.finish()
-//            // Call this when your activity is done and should be closed.
-//            //也就是如果退出上面start的activity，该activity也会退出
-//
-//            //给指定的app发送广播
-//            var mIntent=Intent()
-//            mIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//            mIntent.action = "com.tencent.mm"
-//            this.sendBroadcast(mIntent)
-
-            val mLoginRequest="{\"user_name\":\""+input_name.text.toString()+"\",\"user_password\":\""+input_password.text.toString()+"\"}"
-            Log.d("hello","发送的网络请求是"+mLoginRequest)
-            //发送用户登录请求
-            Http.post_send(this,"http://add52e5.cpolar.io/mlogin",mLoginRequest)
-        }
-
-        /**
          * 读取信息
          */
 //        button_show.setOnClickListener{
@@ -101,28 +101,28 @@ class MainActivity : AppCompatActivity(),HttpResponse,AMapLocationListener {
         /**
          * 释放程序中的某个文件
          */
-        val fileDirectory= File("/sdcard/myMusic")
-        if(!fileDirectory.exists()){
-            fileDirectory.mkdir()
-        }
-        val mFile=File(fileDirectory.path+"/Note.txt")
-        if(!mFile.exists()){
-            mFile.createNewFile()
-            val fos= FileOutputStream(mFile)
-            //返回mFile的文件输出流
-            val fis=this.assets.open("Note.txt")
-            //指定源文件名称
-            val buffer=ByteArray(1024)//定义缓冲区
-            var length=fis.read(buffer)
-            //将fis文件的内容读到buffer中
-            while(length>0){
-                fos.write(buffer,0,length)
-                length=fis.read(buffer)
-            }
-            fos.flush() //Flushes this stream
-            fis.close()
-            fos.close()
-        }
+//        val fileDirectory= File("/sdcard/myMusic")
+//        if(!fileDirectory.exists()){
+//            fileDirectory.mkdir()
+//        }
+//        val mFile=File(fileDirectory.path+"/Note.txt")
+//        if(!mFile.exists()){
+//            mFile.createNewFile()
+//            val fos= FileOutputStream(mFile)
+//            //返回mFile的文件输出流
+//            val fis=this.assets.open("Note.txt")
+//            //指定源文件名称
+//            val buffer=ByteArray(1024)//定义缓冲区
+//            var length=fis.read(buffer)
+//            //将fis文件的内容读到buffer中
+//            while(length>0){
+//                fos.write(buffer,0,length)
+//                length=fis.read(buffer)
+//            }
+//            fos.flush() //Flushes this stream
+//            fis.close()
+//            fos.close()
+//        }
     }
 
 
